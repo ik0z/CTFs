@@ -136,7 +136,7 @@ def pinip():
         response = subprocess.run(["ping", "-c 1", "{}".format(ipadd)], capture_output=True)
     except :
         response = os.system("ping -c 1 " + ipadd+"&&clear")
-    if response.returncode == 0:
+    if response.returncode == 0 or response==0:
         cprint('{} '.format(good)+ipadd+' is up!')
         return 0
     else:
