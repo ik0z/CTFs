@@ -132,7 +132,10 @@ signal.signal(signal.SIGINT, signal_handler)
 
 #--- ping Online or offline 
 def pinip():
-    response = subprocess.run(["ping", "-c 1", "{}".format(ipadd)], capture_output=True)
+    try :
+        response = subprocess.run(["ping", "-c 1", "{}".format(ipadd)], capture_output=True)
+    except :
+        response = os.system("ping -c 1 " + ipadd+"&&clear")
     if response.returncode == 0:
         cprint('{} '.format(good)+ipadd+' is up!')
         return 0
@@ -259,7 +262,7 @@ try :
             else : 
                 cprint("{} Invalid input ".format(err),attrs=['bold']) 
 
-except :
+except Exception():
     cprint("{} Error was found ".format(err),attrs=['bold']) 
 
 #------------ End  
